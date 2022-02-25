@@ -1,0 +1,107 @@
+.cart-wrapper {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-gap: 1rem;
+}
+
+.left-content > *:not(:last-child) {
+  margin-bottom: 4rem;
+}
+
+.left-content,
+.right-content {
+  padding: 2rem;
+}
+
+.cart-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-item {
+  border: 0.04px solid lightgray;
+  border-radius: 4px;
+  padding: 0.7rem;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+.cart-item:not(:last-child) {
+  margin-bottom: 1rem;
+}
+.cart-item > *:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+.qty-container > *:not(:last-child) {
+  margin-right: 0.3rem;
+}
+.qty-box {
+  padding: 0.15rem 0.4rem;
+  background: var(--light);
+  background-color: lightgray;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+.cart-item > .action {
+  margin-top: 2rem;
+}
+.cart-item > .action > *:not(:last-child) {
+  margin-right: 1rem;
+}
+.action-btn {
+  border: none;
+  padding: 0.7rem 1.2rem;
+}
+.action-btn.success {
+  background-color: greenyellow;
+}
+.action-btn.danger {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.checkout-div {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  border-radius: 4px;
+  padding: 1rem;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+.checkout-div > *:not(:last-child) {
+  margin-bottom: 1rem;
+}
+.coupon-code {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  margin-top: 0.5rem;
+}
+.coupon-code-input {
+  width: 100%;
+  border: 0.05px solid var(--tertiary);
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  font-size: 1.2rem;
+  color: grey;
+  padding: 0 0.4rem;
+  text-transform: uppercase;
+}
+.coupon-code-input:focus {
+  border-color: var(--tertiary);
+  outline: none;
+}
+.coupon-code-btn {
+  background: var(--tertiary);
+  color: var(--light);
+}
+.checkout-btn {
+  margin-top: 2rem;
+  width: 100%;
+  background-color: var(--primary);
+  color: var(--light);
+}
