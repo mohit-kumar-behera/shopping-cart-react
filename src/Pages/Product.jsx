@@ -1,25 +1,46 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { connect } from 'react-redux';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+
+import { fetchSingleProduct } from '../redux/Product/action';
+
 import './Product.css';
 
-import products from '../data/product_data';
-
-const Product = () => {
+const Product = ({ product, fetchSingleProduct }) => {
   const { id } = useParams();
 
-  const prod = products.find(prod => prod.id === id);
+  useEffect(() => {
+    fetchSingleProduct(id);
+  });
+
   return (
     <div className="product-container">
-      <h1>{prod.name}</h1>
-      <p>{prod.description}</p>
-      <p>
-        <span>PRICE : ₹</span>
-        <strong>{prod.price}</strong>
-      </p>
+      {product ? (
+        <>
+          <h1>{product.name}</h1>
+          <p>{product.description}</p>
+          <p>
+            <span>PRICE : ₹</span>
+            <strong>{product.price}</strong>
+          </p>
 
-      <button className="action-btn fill-btn">ADD TO CART</button>
+          <button className="action-btn fill-btn">ADD TO CART</button>
+        </>
+      ) : (
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <CircularProgress />
+        </Box>
+      )}
     </div>
   );
 };
 
-export default Product;
+const mapStateToProps = state => {
+  return {
+    product: state.product.currProduct,
+  };
+};
+
+export default connect(mapStateToProps, { fetchSingleProduct })(Product);
