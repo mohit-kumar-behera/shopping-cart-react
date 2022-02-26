@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 
 import { addToCart } from '../../redux/Cart/action';
 
-const AddToCartBtn = ({ text, productId, addToCart }) => {
-  const addToCartHandler = () => {
+const AddToCartBtn = ({ text, className, productId, addToCart }) => {
+  const onClickHandler = () => {
     addToCart(productId);
   };
 
   return (
-    <button className="fill-btn action-btn" onClick={addToCartHandler}>
+    <button className={className} onClick={onClickHandler}>
       {text}
     </button>
   );
@@ -17,6 +17,7 @@ const AddToCartBtn = ({ text, productId, addToCart }) => {
 
 AddToCartBtn.defaultProps = {
   text: 'ADD TO CART',
+  className: 'fill-btn action-btn',
 };
 
 export default connect(null, { addToCart })(AddToCartBtn);

@@ -1,22 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { addToCart } from '../../redux/Cart/action';
+import { addToWishist } from '../../redux/Cart/action';
 
-const AddToCartBtn = ({ text, productId, addToCart }) => {
-  const addToCartHandler = () => {
-    addToCart(productId);
+const AddToWishlistBtn = ({ text, className, productId, addToWishist }) => {
+  const onClickHandler = () => {
+    addToWishist(productId);
   };
 
   return (
-    <button className="fill-btn action-btn" onClick={addToCartHandler}>
+    <button className={className} onClick={onClickHandler}>
       {text}
     </button>
   );
 };
 
-AddToCartBtn.defaultProps = {
-  text: 'ADD TO CART',
+AddToWishlistBtn.defaultProps = {
+  text: 'MOVE TO WISHLIST',
+  className: 'action-btn success',
 };
 
-export default connect(null, { addToCart })(AddToCartBtn);
+export default connect(null, { addToWishist })(AddToWishlistBtn);

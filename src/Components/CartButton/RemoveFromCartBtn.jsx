@@ -1,22 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { addToCart } from '../../redux/Cart/action';
+import { removeFromCart } from '../../redux/Cart/action';
 
-const AddToCartBtn = ({ text, productId, addToCart }) => {
-  const addToCartHandler = () => {
-    addToCart(productId);
+const RemoveFromCartBtn = ({ text, className, productId, removeFromCart }) => {
+  const onClickHandler = () => {
+    removeFromCart(productId);
   };
 
   return (
-    <button className="fill-btn action-btn" onClick={addToCartHandler}>
+    <button className={className} onClick={onClickHandler}>
       {text}
     </button>
   );
 };
 
-AddToCartBtn.defaultProps = {
-  text: 'ADD TO CART',
+RemoveFromCartBtn.defaultProps = {
+  text: 'REMOVE FROM CART',
+  className: 'action-btn',
 };
 
-export default connect(null, { addToCart })(AddToCartBtn);
+export default connect(null, { removeFromCart })(RemoveFromCartBtn);

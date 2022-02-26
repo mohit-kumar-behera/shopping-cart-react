@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 
 import { CART_TYPE } from '../Pages/Cart';
 import AddToCartBtn from './CartButton/AddToCartBtn';
+import AddToWishlistBtn from './CartButton/AddToWishlistBtn';
+import RemoveFromCartBtn from './CartButton/RemoveFromCartBtn';
+import RemoveFromWishlistBtn from './CartButton/RemoveFromWishlistBtn';
 
 const CartItem = ({ type, item }) => {
   const [count, setCount] = useState(1);
@@ -43,15 +46,18 @@ const CartItem = ({ type, item }) => {
 
         {isCart && (
           <>
-            <button className="action-btn success">Move to Wishlist</button>
-            <button className="action-btn danger">Remove from Cart</button>
+            <AddToWishlistBtn productId={item.id} />
+            <RemoveFromCartBtn
+              productId={item.id}
+              className="action-btn danger"
+            />
           </>
         )}
 
         {!isCart && (
           <>
             <AddToCartBtn productId={item.id} text="MOVE TO CART" />
-            <button className="action-btn danger">Remove from Wishlist</button>
+            <RemoveFromWishlistBtn productId={item.id} />
           </>
         )}
       </div>

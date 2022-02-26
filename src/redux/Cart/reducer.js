@@ -24,15 +24,34 @@ const cartReducer = (state = INITIAL_STATE, action = null) => {
                 : item
             )
           : [...state.cart, { ...productToAdd, qty: 1 }],
+        wishlist: state.wishlist.filter(item => item.id !== action.payload.id),
       };
+
     case actionTypes.REMOVE_FROM_CART:
-      return {};
+      return {
+        ...state,
+        cart: state.cart.filter(item => item.id !== action.payload.id),
+      };
+
     case actionTypes.SET_QUANTITY:
       return {};
+
     case actionTypes.ADD_TO_WISHLIST:
-      return {};
+      const fromCartToWishList = state.cart.find(
+        item => item.id === action.payload.id
+      );
+      return {
+        ...state,
+        wishlist: [...state.wishlist, fromCartToWishList],
+        cart: state.cart.filter(item => item.id !== action.payload.id),
+      };
+
     case actionTypes.REMOVE_FROM_WISHLIST:
-      return {};
+      return {
+        ...state,
+        wishlist: state.wishlist.filter(item => item.id !== action.payload.id),
+      };
+
     default:
       return state;
   }
