@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
 
 import { fetchSingleProduct } from '../redux/Product/action';
+import AddToCartBtn from '../Components/CartButton/AddToCartBtn';
+import Loader from '../Components/Loader';
 
 import './Product.css';
 
@@ -25,13 +25,10 @@ const Product = ({ product, fetchSingleProduct }) => {
             <span>PRICE : ₹</span>
             <strong>{product.price}</strong>
           </p>
-
-          <button className="action-btn fill-btn">ADD TO CART</button>
+          <AddToCartBtn productId={product.id} />
         </>
       ) : (
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <CircularProgress />
-        </Box>
+        <Loader />
       )}
     </div>
   );

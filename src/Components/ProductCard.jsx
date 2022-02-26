@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import AddToCartBtn from './CartButton/AddToCartBtn';
+
 const ProductCard = ({ product }) => {
   return (
     <div className="card">
       <div className="card-body">
         <h2>{product.name}</h2>
-        {/* <p>{product.description.substring(0, 55).concat('...')}</p> */}
         <span>PRICE : ₹</span>
         <strong>{product.price}</strong>
       </div>
@@ -14,7 +15,7 @@ const ProductCard = ({ product }) => {
         <Link to={`/product/${product.id}`} className="outline-btn action-btn">
           View
         </Link>
-        <button className="fill-btn action-btn">Add to Cart</button>
+        <AddToCartBtn productId={product.id} />
       </div>
     </div>
   );

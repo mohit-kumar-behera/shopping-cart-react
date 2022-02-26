@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 import './Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ numOfItemsInCart }) => {
   return (
     <nav className="navbar">
       <div className="left">
@@ -17,11 +18,17 @@ const Navbar = () => {
         <Link to="/cart" className="navlink btn">
           <span>Cart</span>
           <ShoppingCartIcon className="cart-icon" />
-          <span>0</span>
+          <span>{numOfItemsInCart.toString()}</span>
         </Link>
       </div>
     </nav>
   );
 };
 
-export default Navbar;
+const mapStateToProps = state => {
+  return {
+    numOfItemsInCart: state.cart.cart.length,
+  };
+};
+
+export default connect(mapStateToProps)(Navbar);

@@ -15,6 +15,7 @@ const Cart = () => {
     <div className="cart-wrapper">
       <div className="left-content">
         <CartItems />
+
         <WishList />
       </div>
       <div className="right-content">

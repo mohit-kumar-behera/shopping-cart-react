@@ -1,16 +1,33 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import { CART_TYPE } from '../Pages/Cart';
 import CartItem from './CartItem';
+import Loader from './Loader';
 
-const CartItems = () => {
+const CartItems = ({ cart }) => {
+  const buildCart = () => {
+    return cart.length ? (
+      cart.map(item => (
+        <CartItem key={item.id} type={CART_TYPE.CART} item={item} />
+      ))
+    ) : (
+      <h3>There are currently no Items in the Cart</h3>
+    );
+  };
+
   return (
     <div className="cart-items">
       <h1 style={{ marginBottom: '1rem' }}>Your Cart</h1>
-      <CartItem type={CART_TYPE.CART} />
-      <CartItem type={CART_TYPE.CART} />
+      {cart ? buildCart() : <Loader />}
     </div>
   );
 };
 
-export default CartItems;
+const mapStateToProps = state => {
+  return {
+    cart: state.cart.cart,
+  };
+};
+
+export default connect(mapStateToProps)(CartItems);
