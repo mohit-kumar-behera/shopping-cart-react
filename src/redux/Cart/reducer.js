@@ -34,7 +34,14 @@ const cartReducer = (state = INITIAL_STATE, action = null) => {
       };
 
     case actionTypes.SET_QUANTITY:
-      return {};
+      return {
+        ...state,
+        cart: state.cart.map(item =>
+          item.id === action.payload.id
+            ? { ...item, qty: action.payload.qty }
+            : item
+        ),
+      };
 
     case actionTypes.ADD_TO_WISHLIST:
       const fromCartToWishList = state.cart.find(

@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { CART_TYPE } from '../Pages/Cart';
 import AddToCartBtn from './CartButton/AddToCartBtn';
 import AddToWishlistBtn from './CartButton/AddToWishlistBtn';
 import RemoveFromCartBtn from './CartButton/RemoveFromCartBtn';
 import RemoveFromWishlistBtn from './CartButton/RemoveFromWishlistBtn';
+import { setQuantity } from '../redux/Cart/action';
 
-const CartItem = ({ type, item }) => {
-  const [count, setCount] = useState(1);
+import useItemQuantity from '../CustomHook/useItemQuantity';
+
+const CartItem = ({ type, item, setQuantity }) => {
+  const [_, setCount] = useItemQuantity(item, setQuantity);
 
   const isCart = type === CART_TYPE.CART;
 
@@ -17,7 +21,7 @@ const CartItem = ({ type, item }) => {
   };
 
   const decrement = () => {
-    setCount(prevState => prevState - 1);
+    setCount(prevState => (prevState !== 1 ? prevState - 1 : 1));
   };
 
   return (
@@ -56,7 +60,11 @@ const CartItem = ({ type, item }) => {
 
         {!isCart && (
           <>
-            <AddToCartBtn productId={item.id} text="MOVE TO CART" />
+            <AddToCartBtn
+              productId={item.id}
+              text="MOVE TO CART"
+              className="action-btn success"
+            />
             <RemoveFromWishlistBtn productId={item.id} />
           </>
         )}
@@ -65,4 +73,4 @@ const CartItem = ({ type, item }) => {
   );
 };
 
-export default CartItem;
+export default connect(null, { setQuantity })(CartItem);
