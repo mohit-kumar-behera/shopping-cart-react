@@ -1,27 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 const Checkout = ({ cart }) => {
-  const getTotalPrice = () => {
-    const totalAmount = 0;
+  const [totalPrice, setTotalPrice] = useState(0);
 
-    if (!cart.length) return totalAmount;
+  useEffect(() => {
+    let totalAmount = 0;
 
-    return cart.reduce(
+    totalAmount = cart.reduce(
       (amt, item) => amt + +item.price * item.qty,
       totalAmount
     );
-  };
+
+    setTotalPrice(totalAmount);
+  }, [cart]);
 
   return (
     <div className="checkout-div">
       <h1>Cart Summary</h1>
-      <h3>Total Price : ₹{getTotalPrice()}</h3>
-      <strong>Apply Coupon Code</strong>
-      <div className="coupon-code">
-        <input type="text" className="coupon-code-input" spellCheck="false" />
-        <button className="action-btn coupon-code-btn">APPLY</button>
-      </div>
+      <h3>Total Price : ₹{totalPrice}</h3>
+      {totalPrice ? (
+        <>
+          <strong>Apply Coupon Code</strong>
+          <div className="coupon-code">
+            <input
+              type="text"
+              className="coupon-code-input"
+              spellCheck="false"
+            />
+            <button className="action-btn coupon-code-btn">APPLY</button>
+          </div>
+        </>
+      ) : (
+        ''
+      )}
+
       <button className="action-btn checkout-btn">PROCEED TO CHECKOUT</button>
     </div>
   );
