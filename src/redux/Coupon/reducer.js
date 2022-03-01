@@ -21,6 +21,11 @@ const couponReducer = (state = INITIAL_STATE, action = null) => {
           coupon.code === action.payload.code ? coupon : null
         ),
       };
+    case actionTypes.REMOVE_COUPON:
+      return {
+        ...state,
+        appliedCoupon: null,
+      };
     default:
       return state;
   }

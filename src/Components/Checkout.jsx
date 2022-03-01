@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { applyCouponCode } from '../redux/Coupon/action';
+import { applyCouponCode, removeCouponCode } from '../redux/Coupon/action';
 
-const Checkout = ({ cart, appliedCoupon, applyCouponCode }) => {
+const Checkout = ({
+  cart,
+  appliedCoupon,
+  applyCouponCode,
+  removeCouponCode,
+}) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [couponCode, setCouponCode] = useState('');
 
@@ -22,7 +27,15 @@ const Checkout = ({ cart, appliedCoupon, applyCouponCode }) => {
     setTotalPrice(Math.round(totalAmount));
   }, [cart, appliedCoupon]);
 
-  const onClickHandler = () => applyCouponCode(couponCode);
+  const onClickApplyHandler = () => {
+    applyCouponCode(couponCode);
+    setCouponCode('');
+  };
+
+  const onClickRemoveHandler = () => {
+    removeCouponCode();
+    setCouponCode('');
+  };
 
   return (
     <div className="checkout-div">
@@ -37,6 +50,9 @@ const Checkout = ({ cart, appliedCoupon, applyCouponCode }) => {
                 <strong>{appliedCoupon.code}</strong> is applied,{' '}
                 <strong>{appliedCoupon.discountPercentage}% OFF</strong>
               </label>
+              <button className="close-btn" onClick={onClickRemoveHandler}>
+                &times;
+              </button>
             </p>
           )}
 
@@ -50,7 +66,7 @@ const Checkout = ({ cart, appliedCoupon, applyCouponCode }) => {
             />
             <button
               className="action-btn coupon-code-btn"
-              onClick={onClickHandler}
+              onClick={onClickApplyHandler}
             >
               APPLY
             </button>
@@ -72,4 +88,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { applyCouponCode })(Checkout);
+export default connect(mapStateToProps, { applyCouponCode, removeCouponCode })(
+  Checkout
+);

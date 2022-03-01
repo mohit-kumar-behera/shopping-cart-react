@@ -12,3 +12,9 @@ export const applyCouponCode = code => {
     payload: { code },
   };
 };
+
+export const removeCouponCode = () => {
+  return {
+    type: actionTypes.REMOVE_COUPON,
+  };
+};
